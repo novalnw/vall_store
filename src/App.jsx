@@ -1,17 +1,25 @@
 import { useState } from 'react'
 
-// Import 6 foto lokal dari folder src/image/
+// Import 10 foto lokal dari folder src/image/
 import foto1 from './image/foto1.jpg'
 import foto2 from './image/foto2.jpg'
 import foto3 from './image/foto3.jpg'
 import foto4 from './image/foto4.jpg'
 import foto5 from './image/foto5.jpg'
 import foto6 from './image/foto6.jpg'
+import foto7 from './image/foto7.jpg'
+import foto8 from './image/foto8.jpg'
+import foto9 from './image/foto9.jpg'
+import foto10 from './image/foto10.jpg'
+import foto11 from './image/foto11.jpg'
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false)
   const [cart, setCart] = useState([])
   const [isCartOpen, setIsCartOpen] = useState(false)
+  
+  // State untuk Toggle Hamburger Menu Navbar Mobile
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   // State untuk Filter Brand & Kategori
   const [selectedBrand, setSelectedBrand] = useState('All')
@@ -21,6 +29,9 @@ export default function App() {
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [selectedSize, setSelectedSize] = useState('40')
   const [selectedColor, setSelectedColor] = useState('Classic')
+
+  // State untuk Form Contact Me
+  const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' })
 
   // Data produk lengkap dengan Brand & Kategori
   const [products] = useState([
@@ -78,6 +89,52 @@ export default function App() {
       image: foto6,
       description: 'Desain ramping ala skater dengan traksi luar biasa dan durabilitas tinggi.' 
     },
+    { 
+      id: 7, 
+      name: 'Sepatu Puma Women s Velocity', 
+      brand: 'Puma',
+      category: 'Running',
+      price: 550000, 
+      image: foto7,
+      description: 'Gaya high-top basket klasik yang diadaptasi sempurna untuk gaya hidup urban modern.' 
+    },
+    { 
+      id: 8, 
+      name: 'Sepatu Puma Zapatillas Unisex Park Lifestyle SD', 
+      brand: 'Puma',
+      category: 'Lifestyle',
+      price: 1500000, 
+      image: foto8,
+      description: 'Desain ramping ala skater dengan traksi luar biasa dan durabilitas tinggi.' 
+    },
+    { 
+      id: 9, 
+      name: 'Sepatu Baskets CA Pro Classic', 
+      brand: 'Puma',
+      category: 'Basketball',
+      price: 2000000, 
+      image: foto9,
+      description: 'Gaya high-top basket klasik yang diadaptasi sempurna untuk gaya hidup urban modern.' 
+    },
+    { 
+      id: 10, 
+      name: 'Sepatu Puma Slipstream Lo FG, Off White Green', 
+      brand: 'Puma',
+      category: 'Sneakers',
+      price: 1500000, 
+      image: foto10,
+      description: 'Desain ramping ala skater dengan traksi luar biasa dan durabilitas tinggi.' 
+    },  
+    { 
+      id: 11, 
+      name: 'Sepatu Onitsuka Tiger Serang Orange', 
+      brand: 'Onitsuka',
+      category: 'Sneakers',
+      price: 1000000, 
+      image: foto11,
+      description: 'Desain ramping ala skater dengan traksi luar biasa dan durabilitas tinggi.' 
+    },  
+    
   ])
 
   // Filter Produk berdasarkan Brand dan Kategori
@@ -109,7 +166,7 @@ export default function App() {
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0)
   const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0)
 
-  // Fungsi Checkout ke WhatsApp
+  // Fungsi Checkout ke WhatsApp secara Otomatis
   const handleCheckoutWhatsApp = () => {
     const phoneNumber = "6287825677105" 
     
@@ -131,6 +188,19 @@ export default function App() {
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`
 
     window.open(whatsappURL, '_blank')
+  }
+
+  // Fungsi Kirim Pesan Contact Me ke WhatsApp
+  const handleContactSubmit = (e) => {
+    e.preventDefault()
+    const phoneNumber = "6287825677105"
+    let message = `Halo STORE.VALL, saya ada pertanyaan/pesan:\n\n`
+    message += `*Nama:* ${contactForm.name}\n`
+    message += `*Email/Kontak:* ${contactForm.email}\n`
+    message += `*Pesan:* ${contactForm.message}`
+
+    const encodedMessage = encodeURIComponent(message)
+    window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank')
   }
 
   return (
@@ -166,13 +236,14 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-xl font-extrabold tracking-wider text-indigo-600 dark:text-indigo-400 animate-fade-in">STORE.VALL</h1>
           
-          <div className="flex items-center gap-3">
+          {/* Desktop Navigation */}
+          <div className="hidden sm:flex items-center gap-3">
             <button 
               onClick={() => setDarkMode(!darkMode)}
               className="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 font-semibold px-4 py-2 rounded-xl text-sm transition-all duration-300 cursor-pointer active:scale-95"
               title="Ganti Tema"
             >
-              {darkMode ? '🌙 Night' : '☀️ Light'}
+              {darkMode ? 'Night' : 'Light'}
             </button>
 
             <button 
@@ -182,25 +253,61 @@ export default function App() {
               🛒 Keranjang ({totalItems})
             </button>
           </div>
+
+          {/* Mobile Hamburger Button */}
+          <div className="flex sm:hidden items-center gap-2">
+            <button 
+              onClick={() => setIsCartOpen(true)}
+              className="relative bg-indigo-600 text-white p-2.5 rounded-xl font-semibold shadow-md active:scale-95"
+            >
+              🛒
+              {totalItems > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow">
+                  {totalItems}
+                </span>
+              )}
+            </button>
+
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2.5 rounded-xl font-bold cursor-pointer active:scale-95 transition-colors"
+              title="Menu"
+            >
+              {isMobileMenuOpen ? '✕' : '☰'}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Dropdown Menu */}
+        {isMobileMenuOpen && (
+          <div className="sm:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 px-4 py-4 flex flex-col gap-3 animate-fade-in shadow-lg">
+            <button 
+              onClick={() => {
+                setDarkMode(!darkMode)
+                setIsMobileMenuOpen(false)
+              }}
+              className="w-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 font-semibold px-4 py-3 rounded-xl text-sm text-center transition-all cursor-pointer"
+            >
+              {darkMode ? 'Mode Terang (Light)' : 'Mode Malam (Night)'}
+            </button>
+          </div>
+        )}
       </header>
 
       {/* Hero Section dengan Animasi Fade-In & Floating */}
       <section className="relative bg-black text-white py-24 px-4 overflow-hidden text-center">
-        {/* Background Foto dengan Animasi Glow */}
         <div className="absolute inset-0 z-0">
           <img 
             src={foto1} 
             alt="Hero Banner" 
             className="w-full h-full object-cover opacity-40 scale-105 filter brightness-90 contrast-110 animate-pulse-glow transition-transform duration-1000"
           />
-          {/* Gradasi Hitam Pekat Elegan */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/60 to-black/95"></div>
         </div>
 
         <div className="max-w-3xl mx-auto relative z-10 flex flex-col items-center animate-fade-in">
           <span className="bg-white/10 backdrop-blur-md text-white border border-white/20 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg animate-float">
-            VALL COLLECTION • 2026
+            VALL COLLECTION
           </span>
           <h2 className="text-4xl sm:text-6xl font-extrabold mt-6 mb-4 text-white tracking-tight leading-tight drop-shadow-lg">
             Welcome To My Store
@@ -217,36 +324,51 @@ export default function App() {
         </div>
       </section>
 
-      {/* Brand Bar */}
-      <section className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 py-5 shadow-xs transition-colors">
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-8 sm:gap-16 overflow-x-auto">
-          {['All', 'Nike', 'Adidas', 'Puma', 'Onitsuka'].map((brand) => (
-            <button
-              key={brand}
-              onClick={() => setSelectedBrand(brand)}
-              className={`font-black text-xs sm:text-sm tracking-[0.2em] uppercase cursor-pointer whitespace-nowrap pb-1.5 border-b-2 transition-all duration-300 ${
-                selectedBrand === brand 
-                  ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400 scale-105' 
-                  : 'border-transparent text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:scale-105'
-              }`}
+      {/* Brand Bar / Filter Brand */}
+      <section className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 py-4 shadow-xs transition-colors">
+        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between sm:justify-center">
+          <div className="flex sm:hidden w-full items-center justify-between gap-3">
+            <span className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">Filter Brand:</span>
+            <select
+              value={selectedBrand}
+              onChange={(e) => setSelectedBrand(e.target.value)}
+              className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 font-bold text-xs px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
-              {brand === 'All' ? 'ALL BRANDS' : brand}
-            </button>
-          ))}
+              {['All', 'Nike', 'Adidas', 'Puma', 'Onitsuka'].map((brand) => (
+                <option key={brand} value={brand}>
+                  {brand === 'All' ? 'ALL BRANDS' : brand}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="hidden sm:flex items-center gap-16 overflow-x-auto scrollbar-none">
+            {['All', 'Nike', 'Adidas', 'Puma', 'Onitsuka'].map((brand) => (
+              <button
+                key={brand}
+                onClick={() => setSelectedBrand(brand)}
+                className={`font-black text-sm tracking-[0.2em] uppercase cursor-pointer whitespace-nowrap pb-1.5 border-b-2 transition-all duration-300 ${
+                  selectedBrand === brand 
+                    ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400 scale-105' 
+                    : 'border-transparent text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:scale-105'
+                }`}
+              >
+                {brand === 'All' ? 'ALL BRANDS' : brand}
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Main Content / Katalog */}
       <main id="katalog" className="max-w-7xl mx-auto px-4 py-10">
-        
-        {/* Kategori Filter Chips */}
-        <div className="mb-8 flex flex-col sm:flex-row justify-between items-center gap-4 animate-fade-in">
+        <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 animate-fade-in">
           <div>
             <h3 className="text-2xl font-extrabold">Featured Products</h3>
             <p className="text-gray-500 dark:text-gray-400 text-sm mt-0.5">Pilih gaya sepatu impianmu dan amankan sebelum kehabisan.</p>
           </div>
 
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 w-full sm:w-auto">
             {['All', 'Lifestyle', 'Running', 'Basketball', 'Sneakers', 'Skate'].map((cat) => (
               <button
                 key={cat}
@@ -308,6 +430,112 @@ export default function App() {
           </div>
         )}
       </main>
+
+      {/* Contact Me Section */}
+      <section className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-16 px-4 transition-colors">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-12 animate-fade-in">
+            <span className="bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200 dark:border-indigo-800">
+              Hubungi Saya
+            </span>
+            <h3 className="text-3xl font-extrabold mt-4 text-gray-900 dark:text-white">STORE.VALL</h3>
+            <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">
+              Punya pertanyaan seputar produk, kendala pesanan, atau ingin mampir ke lokasi? Cek info dan peta di bawah ini!
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            <div className="bg-gray-50 dark:bg-gray-900/50 p-8 rounded-3xl border border-gray-200 dark:border-gray-700 space-y-6">
+              <h4 className="text-xl font-bold text-gray-900 dark:text-white">Informasi & Lokasi Toko</h4>
+              
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 rounded-2xl flex items-center justify-center text-xl shrink-0 font-bold">
+                  📍
+                </div>
+                <div>
+                  <h5 className="font-bold text-gray-900 dark:text-white text-sm">Alamat Store</h5>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm mt-0.5">Kecamatan Sidoarjo, Kabupaten Sidoarjo, Jawa Timur</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 rounded-2xl flex items-center justify-center text-xl shrink-0 font-bold">
+                  💬
+                </div>
+                <div>
+                  <h5 className="font-bold text-gray-900 dark:text-white text-sm">WhatsApp Only</h5>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm mt-0.5">+62 878-2567-7105</p>
+                </div>
+              </div>
+
+              <div className="w-full h-48 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-inner">
+                <iframe 
+                  title="Store Location Map"
+                  src="https://www.google.com/maps?q=-7.4405832,112.6939621&z=16&output=embed" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0 }} 
+                  allowFullScreen="" 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </div>
+
+            <form onSubmit={handleContactSubmit} className="bg-gray-50 dark:bg-gray-900/50 p-8 rounded-3xl border border-gray-200 dark:border-gray-700 space-y-4">
+              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Kirim Pesan Cepat</h4>
+              
+              <div>
+                <label className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider block mb-1">Nama Anda:</label>
+                <input 
+                  type="text" 
+                  required
+                  placeholder="Masukkan nama lengkap..."
+                  value={contactForm.name}
+                  onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
+                  className="w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-medium text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+
+              <div>
+                <label className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider block mb-1">Email / Kontak:</label>
+                <input 
+                  type="text" 
+                  required
+                  placeholder="Masukkan email / nomor HP..."
+                  value={contactForm.email}
+                  onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
+                  className="w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-medium text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+
+              <div>
+                <label className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider block mb-1">Pesan:</label>
+                <textarea 
+                  required
+                  rows="3"
+                  placeholder="Tulis pesan atau pertanyaanmu di sini..."
+                  value={contactForm.message}
+                  onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
+                  className="w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-medium text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+                ></textarea>
+              </div>
+
+              <button 
+                type="submit"
+                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl transition-all duration-300 shadow-md cursor-pointer hover:scale-[1.02] active:scale-95"
+              >
+                Kirim Pesan via WhatsApp
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-black text-gray-400 text-center py-6 text-xs border-t border-gray-800">
+        <p>© 2026 STORE.VALL. All rights reserved.</p>
+      </footer>
 
       {/* Modal Detail Produk */}
       {selectedProduct && (
@@ -425,31 +653,36 @@ export default function App() {
                     </div>
                     <button 
                       onClick={() => handleRemoveItem(index)}
-                      className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 text-xs font-semibold bg-red-50 dark:bg-red-950/50 hover:bg-red-100 px-2.5 py-1.5 rounded-lg transition-colors cursor-pointer"
+                      className="text-red-400 hover:text-red-600 font-bold text-sm p-2 cursor-pointer transition-colors"
+                      title="Hapus Item"
                     >
-                      Hapus
+                      🗑️
                     </button>
                   </div>
                 ))
               )}
             </div>
 
-            <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
-              <div className="flex justify-between mb-4 text-lg font-bold text-gray-900 dark:text-white">
-                <span>Total Belanja:</span>
-                <span className="text-indigo-600 dark:text-indigo-400">Rp {totalPrice.toLocaleString('id-ID')}</span>
+            {cart.length > 0 && (
+              <div className="border-t border-gray-200 dark:border-gray-700 pt-4 space-y-3">
+                <div className="flex justify-between items-center text-base font-bold">
+                  <span className="text-gray-600 dark:text-gray-400">Total Harga:</span>
+                  <span className="text-indigo-600 dark:text-indigo-400 text-lg">
+                    Rp {totalPrice.toLocaleString('id-ID')}
+                  </span>
+                </div>
+                <button 
+                  onClick={handleCheckoutWhatsApp}
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition-all duration-300 shadow-lg cursor-pointer flex items-center justify-center gap-2 active:scale-95 hover:scale-[1.02]"
+                >
+                  💬 Checkout via WhatsApp
+                </button>
               </div>
-              <button 
-                disabled={cart.length === 0}
-                onClick={handleCheckoutWhatsApp}
-                className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-300 dark:disabled:bg-gray-700 text-white font-bold py-3 rounded-xl transition-all duration-300 cursor-pointer shadow-md flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95"
-              >
-                💬 Checkout via WhatsApp
-              </button>
-            </div>
+            )}
           </div>
         </div>
       )}
+
     </div>
   )
 }
