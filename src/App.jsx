@@ -96,7 +96,7 @@ export default function App() {
       category: 'Running',
       price: 550000, 
       image: foto7,
-      description: 'Gaya high-top basket klasik yang diadaptasi sempurna untuk gaya hidup urban modern.' 
+      description: 'Product Dengan Desain Yang elegan serta pemakaian yang nyaman ' 
     },
     { 
       id: 8, 
@@ -105,7 +105,7 @@ export default function App() {
       category: 'Lifestyle',
       price: 1500000, 
       image: foto8,
-      description: 'Desain ramping ala skater dengan traksi luar biasa dan durabilitas tinggi.' 
+      description: 'Desain Menarik Sehingga Bagus Di Katakan LifeStyle' 
     },
     { 
       id: 9, 
@@ -114,7 +114,7 @@ export default function App() {
       category: 'Basketball',
       price: 2000000, 
       image: foto9,
-      description: 'Gaya high-top basket klasik yang diadaptasi sempurna untuk gaya hidup urban modern.' 
+      description: 'Product Yang di fokuskan untuk olarhraga Basketball Sangat menarik perhatian saat di gunakan.' 
     },
     { 
       id: 10, 
@@ -123,7 +123,7 @@ export default function App() {
       category: 'Sneakers',
       price: 1500000, 
       image: foto10,
-      description: 'Desain ramping ala skater dengan traksi luar biasa dan durabilitas tinggi.' 
+      description: 'Desain yang tidak kalah dengan product lain serta tingkat original nya terjamin.' 
     },  
     { 
       id: 11, 
@@ -132,7 +132,7 @@ export default function App() {
       category: 'Sneakers',
       price: 1000000, 
       image: foto11,
-      description: 'Desain ramping ala skater dengan traksi luar biasa dan durabilitas tinggi.' 
+      description: 'Sepatu Yang di ciptakan di negara jepang tentu nya sangat menarik perhatian' 
     },  
     
   ])
@@ -170,7 +170,7 @@ export default function App() {
   const handleCheckoutWhatsApp = () => {
     const phoneNumber = "6287825677105" 
     
-    let message = "Halo STORE.VALL, saya ingin memesan produk berikut:\n\n"
+    let message = "Halo VALL.STORE, saya ingin memesan produk berikut:\n\n"
     
     cart.forEach((item, index) => {
       message += `${index + 1}. *${item.name}*\n`
@@ -194,7 +194,7 @@ export default function App() {
   const handleContactSubmit = (e) => {
     e.preventDefault()
     const phoneNumber = "6287825677105"
-    let message = `Halo STORE.VALL, saya ada pertanyaan/pesan:\n\n`
+    let message = `Halo VALL.STORE, saya ada pertanyaan/pesan:\n\n`
     message += `*Nama:* ${contactForm.name}\n`
     message += `*Email/Kontak:* ${contactForm.email}\n`
     message += `*Pesan:* ${contactForm.message}`
@@ -234,7 +234,7 @@ export default function App() {
       {/* Navbar */}
       <header className="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50 transition-colors">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-extrabold tracking-wider text-indigo-600 dark:text-indigo-400 animate-fade-in">STORE.VALL</h1>
+          <h1 className="text-xl font-extrabold tracking-wider text-indigo-600 dark:text-indigo-400 animate-fade-in">VALL.STORE</h1>
           
           {/* Desktop Navigation */}
           <div className="hidden sm:flex items-center gap-3">
@@ -389,7 +389,7 @@ export default function App() {
         {filteredProducts.length === 0 ? (
           <div className="text-center py-20 text-gray-400 animate-fade-in">
             <p className="text-4xl mb-2">🔍</p>
-            <p className="font-medium">Produk dengan kategori/brand tersebut belum tersedia, bre!</p>
+            <p className="font-medium">Produk dengan kategori/brand tersebut belum tersedia!!</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -438,7 +438,7 @@ export default function App() {
             <span className="bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200 dark:border-indigo-800">
               Hubungi Saya
             </span>
-            <h3 className="text-3xl font-extrabold mt-4 text-gray-900 dark:text-white">STORE.VALL</h3>
+            <h3 className="text-3xl font-extrabold mt-4 text-gray-900 dark:text-white">Vall.Store</h3>
             <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">
               Punya pertanyaan seputar produk, kendala pesanan, atau ingin mampir ke lokasi? Cek info dan peta di bawah ini!
             </p>
@@ -450,7 +450,7 @@ export default function App() {
               
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 rounded-2xl flex items-center justify-center text-xl shrink-0 font-bold">
-                  📍
+                  🏡
                 </div>
                 <div>
                   <h5 className="font-bold text-gray-900 dark:text-white text-sm">Alamat Store</h5>
@@ -534,7 +534,7 @@ export default function App() {
 
       {/* Footer */}
       <footer className="bg-black text-gray-400 text-center py-6 text-xs border-t border-gray-800">
-        <p>© 2026 STORE.VALL. All rights reserved.</p>
+        <p>© VALL.STORE All rights reserved.</p>
       </footer>
 
       {/* Modal Detail Produk */}
@@ -634,7 +634,7 @@ export default function App() {
               {cart.length === 0 ? (
                 <div className="text-center text-gray-400 py-20">
                   <p className="text-4xl mb-2">🛒</p>
-                  <p className="font-medium">Keranjangmu masih kosong, bre!</p>
+                  <p className="font-medium">Keranjangmu masih kosong Silahkan Belanja Terlebih Dahulu!!!</p>
                 </div>
               ) : (
                 cart.map((item, index) => (
