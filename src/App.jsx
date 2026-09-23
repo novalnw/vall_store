@@ -12,6 +12,7 @@ import foto8 from './image/foto8.jpg'
 import foto9 from './image/foto9.jpg'
 import foto10 from './image/foto10.jpg'
 import foto11 from './image/foto11.jpg'
+import foto12 from './image/foto12.jpg'
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false)
@@ -134,7 +135,15 @@ export default function App() {
       image: foto11,
       description: 'Sepatu Yang di ciptakan di negara jepang tentu nya sangat menarik perhatian' 
     },  
-    
+    { 
+      id: 12, 
+      name: 'Sepatu LV (Louis Vuitton)', 
+      brand: 'LV (Louis Vuitton)',
+      category: 'Running',
+      price: 1500000, 
+      image: foto12,
+      description: 'Sepatu Yang di ciptakan di negara jepang tentu nya sangat menarik perhatian' 
+    },  
   ])
 
   // Filter Produk berdasarkan Brand dan Kategori
@@ -334,7 +343,7 @@ export default function App() {
               onChange={(e) => setSelectedBrand(e.target.value)}
               className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 font-bold text-xs px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
-              {['All', 'Nike', 'Adidas', 'Puma', 'Onitsuka'].map((brand) => (
+              {['All', 'Nike', 'Adidas', 'Puma', 'Onitsuka','LV (Louis Vuitton)'].map((brand) => (
                 <option key={brand} value={brand}>
                   {brand === 'All' ? 'ALL BRANDS' : brand}
                 </option>
@@ -343,7 +352,7 @@ export default function App() {
           </div>
 
           <div className="hidden sm:flex items-center gap-16 overflow-x-auto scrollbar-none">
-            {['All', 'Nike', 'Adidas', 'Puma', 'Onitsuka'].map((brand) => (
+            {['All', 'Nike', 'Adidas', 'Puma', 'Onitsuka','LV (Louis Vuitton)'].map((brand) => (
               <button
                 key={brand}
                 onClick={() => setSelectedBrand(brand)}
