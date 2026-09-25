@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-// Import 10 foto lokal dari folder src/image/
+// Import 12 foto lokal dari folder src/image/
 import foto1 from './image/foto1.jpg'
 import foto2 from './image/foto2.jpg'
 import foto3 from './image/foto3.jpg'
@@ -13,6 +13,10 @@ import foto9 from './image/foto9.jpg'
 import foto10 from './image/foto10.jpg'
 import foto11 from './image/foto11.jpg'
 import foto12 from './image/foto12.jpg'
+import foto13 from './image/foto13.jpg'
+import foto14 from './image/foto14.jpg'
+import foto15 from './image/foto15.jpg'
+
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false)
@@ -22,7 +26,8 @@ export default function App() {
   // State untuk Toggle Hamburger Menu Navbar Mobile
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  // State untuk Filter Brand & Kategori
+  // State untuk Filter Origin ('All', 'Luar', 'Lokal') & Selected Brand Specific
+  const [selectedOrigin, setSelectedOrigin] = useState('All')
   const [selectedBrand, setSelectedBrand] = useState('All')
   const [selectedCategory, setSelectedCategory] = useState('All')
 
@@ -34,12 +39,14 @@ export default function App() {
   // State untuk Form Contact Me
   const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' })
 
-  // Data produk lengkap dengan Brand & Kategori
+  // Data produk lengkap dengan Brand, Origin (Luar/Lokal), & Kategori
+  // (Silakan ubah 'origin' jadi 'Lokal' pada produk lokal yang kamu punya)
   const [products] = useState([
     { 
       id: 1, 
       name: 'Sepatu Adidas Samba OG', 
       brand: 'Adidas',
+      origin: 'Luar',
       category: 'Lifestyle',
       price: 450000, 
       image: foto1,
@@ -49,6 +56,7 @@ export default function App() {
       id: 2, 
       name: 'Sepatu Adidas Blue Samba', 
       brand: 'Adidas',
+      origin: 'Luar',
       category: 'Lifestyle',
       price: 275000, 
       image: foto2,
@@ -58,6 +66,7 @@ export default function App() {
       id: 3, 
       name: 'Sepatu Adidas Green Samba', 
       brand: 'Adidas',
+      origin: 'Luar',
       category: 'Running',
       price: 320000, 
       image: foto3,
@@ -67,6 +76,7 @@ export default function App() {
       id: 4, 
       name: 'Sepatu Nike Air Force 1 Low', 
       brand: 'Nike',
+      origin: 'Luar',
       category: 'Sneakers',
       price: 450000, 
       image: foto4,
@@ -76,6 +86,7 @@ export default function App() {
       id: 5, 
       name: 'Sepatu Nike Air Jordan 1 Mid', 
       brand: 'Nike',
+      origin: 'Luar',
       category: 'Basketball',
       price: 550000, 
       image: foto5,
@@ -85,6 +96,7 @@ export default function App() {
       id: 6, 
       name: 'Sepatu Nike SB Blazer Mid', 
       brand: 'Nike',
+      origin: 'Luar',
       category: 'Skate',
       price: 320000, 
       image: foto6,
@@ -94,6 +106,7 @@ export default function App() {
       id: 7, 
       name: 'Sepatu Puma Women s Velocity', 
       brand: 'Puma',
+      origin: 'Luar',
       category: 'Running',
       price: 550000, 
       image: foto7,
@@ -103,6 +116,7 @@ export default function App() {
       id: 8, 
       name: 'Sepatu Puma Zapatillas Unisex Park Lifestyle SD', 
       brand: 'Puma',
+      origin: 'Luar',
       category: 'Lifestyle',
       price: 1500000, 
       image: foto8,
@@ -112,6 +126,7 @@ export default function App() {
       id: 9, 
       name: 'Sepatu Baskets CA Pro Classic', 
       brand: 'Puma',
+      origin: 'Luar',
       category: 'Basketball',
       price: 2000000, 
       image: foto9,
@@ -121,6 +136,7 @@ export default function App() {
       id: 10, 
       name: 'Sepatu Puma Slipstream Lo FG, Off White Green', 
       brand: 'Puma',
+      origin: 'Luar',
       category: 'Sneakers',
       price: 1500000, 
       image: foto10,
@@ -130,6 +146,7 @@ export default function App() {
       id: 11, 
       name: 'Sepatu Onitsuka Tiger Serang Orange', 
       brand: 'Onitsuka',
+      origin: 'Luar',
       category: 'Sneakers',
       price: 1000000, 
       image: foto11,
@@ -139,18 +156,70 @@ export default function App() {
       id: 12, 
       name: 'Sepatu LV (Louis Vuitton)', 
       brand: 'LV (Louis Vuitton)',
+      origin: 'Luar',
       category: 'Running',
       price: 1500000, 
       image: foto12,
       description: 'Sepatu Yang di ciptakan di negara jepang tentu nya sangat menarik perhatian' 
-    },  
+    },
+    { 
+      id: 13, 
+      name: 'Sepatu Patrobas', 
+      brand: 'Patrobas',
+      origin: 'Lokal',
+      category: 'Lifestyle',
+      price: 329000, 
+      image: foto13,
+      description: 'Sepatu Yang di ciptakan di tanah air yaitu di indonesia tentu nya' 
+    },
+     { 
+      id: 14, 
+      name: 'Compas Tribun', 
+      brand: 'Compass',
+      origin: 'Lokal',
+      category: 'Lifestyle',
+      price: 200000, 
+      image: foto14,
+      description: 'Sepatu Yang di ciptakan di tanah air yaitu di indonesia tentu nya' 
+    },
+    { 
+      id: 15, 
+      name: 'Sepatu Vantela Evo ', 
+      brand: 'Vantela',
+      origin: 'Lokal',
+      category: 'Lifestyle',
+      price: 200000, 
+      image: foto15,
+      description: 'Sepatu Yang di ciptakan di tanah air yaitu di indonesia tentu nya' 
+    },
+    { 
+      id: 16, 
+      name: 'Sepatu Aerostreet ', 
+      brand: 'Aerostreet',
+      origin: 'Lokal',
+      category: 'Lifestyle',
+      price: 195000, 
+      image: foto15,
+      description: 'Sepatu Yang di ciptakan di tanah air yaitu di indonesia tentu nya' 
+    },
+
   ])
 
-  // Filter Produk berdasarkan Brand dan Kategori
+  // Logika Filter Berdasarkan Origin (All/Luar/Lokal), Brand Spesifik, & Kategori
   const filteredProducts = products.filter(product => {
-    const matchesBrand = selectedBrand === 'All' || product.brand === selectedBrand
+    let matchesOrigin = true
+    if (selectedOrigin !== 'All') {
+      matchesOrigin = product.origin === selectedOrigin
+    }
+
+    let matchesBrand = true
+    if (selectedBrand !== 'All') {
+      matchesBrand = product.brand === selectedBrand
+    }
+
     const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory
-    return matchesBrand && matchesCategory
+
+    return matchesOrigin && matchesBrand && matchesCategory
   })
 
   const handleAddToCart = (product, size, color) => {
@@ -178,7 +247,6 @@ export default function App() {
   // Fungsi Checkout ke WhatsApp secara Otomatis
   const handleCheckoutWhatsApp = () => {
     const phoneNumber = "6287825677105" 
-    
     let message = "Halo VALL.STORE, saya ingin memesan produk berikut:\n\n"
     
     cart.forEach((item, index) => {
@@ -194,9 +262,7 @@ export default function App() {
     message += "Mohon info ketersediaan dan proses selanjutnya. Terima kasih!"
 
     const encodedMessage = encodeURIComponent(message)
-    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`
-
-    window.open(whatsappURL, '_blank')
+    window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank')
   }
 
   // Fungsi Kirim Pesan Contact Me ke WhatsApp
@@ -210,6 +276,18 @@ export default function App() {
 
     const encodedMessage = encodeURIComponent(message)
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank')
+  }
+
+  // Daftar Brand berdasarkan Origin yang dipilih
+  const getAvailableBrands = () => {
+    if (selectedOrigin === 'Luar') {
+      return ['Adidas', 'Nike', 'Puma', 'Onitsuka', 'LV (Louis Vuitton)']
+    } else if (selectedOrigin === 'Lokal') {
+      // Masukkan daftar brand lokal kamu di sini jika ada
+      return ['Patrobas', 'Compass', 'Vantela', 'Aerostreet'] 
+    }
+    // Kalau 'All', gabung semuanya
+    return ['Adidas', 'Nike', 'Puma', 'Onitsuka', 'LV (Louis Vuitton)']
   }
 
   return (
@@ -303,7 +381,7 @@ export default function App() {
         )}
       </header>
 
-      {/* Hero Section dengan Animasi Fade-In & Floating */}
+      {/* Hero Section */}
       <section className="relative bg-black text-white py-24 px-4 overflow-hidden text-center">
         <div className="absolute inset-0 z-0">
           <img 
@@ -333,39 +411,64 @@ export default function App() {
         </div>
       </section>
 
-      {/* Brand Bar / Filter Brand */}
+      {/* Filter Bar Utama (All Brands, Brand Luar, Brand Lokal) */}
       <section className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 py-4 shadow-xs transition-colors">
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between sm:justify-center">
-          <div className="flex sm:hidden w-full items-center justify-between gap-3">
-            <span className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">Filter Brand:</span>
-            <select
-              value={selectedBrand}
-              onChange={(e) => setSelectedBrand(e.target.value)}
-              className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 font-bold text-xs px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              {['All', 'Nike', 'Adidas', 'Puma', 'Onitsuka','LV (Louis Vuitton)'].map((brand) => (
-                <option key={brand} value={brand}>
-                  {brand === 'All' ? 'ALL BRANDS' : brand}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="hidden sm:flex items-center gap-16 overflow-x-auto scrollbar-none">
-            {['All', 'Nike', 'Adidas', 'Puma', 'Onitsuka','LV (Louis Vuitton)'].map((brand) => (
+        <div className="max-w-7xl mx-auto px-4 flex flex-col items-center gap-3">
+          
+          {/* Tombol Level 1 */}
+          <div className="flex items-center gap-8 sm:gap-12 py-1 overflow-x-auto w-full justify-center">
+            {[
+              { label: 'ALL BRANDS', value: 'All' },
+              { label: 'BRAND LUAR', value: 'Luar' },
+              { label: 'BRAND LOKAL', value: 'Lokal' }
+            ].map((item) => (
               <button
-                key={brand}
-                onClick={() => setSelectedBrand(brand)}
-                className={`font-black text-sm tracking-[0.2em] uppercase cursor-pointer whitespace-nowrap pb-1.5 border-b-2 transition-all duration-300 ${
-                  selectedBrand === brand 
+                key={item.value}
+                onClick={() => {
+                  setSelectedOrigin(item.value)
+                  setSelectedBrand('All') // Reset sub-brand ketika kategori utama diganti
+                }}
+                className={`font-black text-sm tracking-[0.15em] uppercase cursor-pointer whitespace-nowrap pb-1.5 border-b-2 transition-all duration-300 ${
+                  selectedOrigin === item.value 
                     ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400 scale-105' 
-                    : 'border-transparent text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:scale-105'
+                    : 'border-transparent text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
                 }`}
               >
-                {brand === 'All' ? 'ALL BRANDS' : brand}
+                {item.label}
               </button>
             ))}
           </div>
+
+          {/* Tombol Level 2 (Sub-Merek Muncul Otomatis Sesuai Pilihan) */}
+          {selectedOrigin !== 'All' && (
+            <div className="flex items-center gap-3 flex-wrap justify-center pt-2 border-t border-gray-100 dark:border-gray-700/60 w-full animate-fade-in">
+              <button
+                onClick={() => setSelectedBrand('All')}
+                className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  selectedBrand === 'All'
+                    ? 'bg-indigo-600 text-white'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200'
+                }`}
+              >
+                Semua {selectedOrigin === 'Luar' ? 'Brand Luar' : 'Brand Lokal'}
+              </button>
+
+              {getAvailableBrands().map((brandName) => (
+                <button
+                  key={brandName}
+                  onClick={() => setSelectedBrand(brandName)}
+                  className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    selectedBrand === brandName
+                      ? 'bg-indigo-600 text-white'
+                      : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200'
+                  }`}
+                >
+                  {brandName}
+                </button>
+              ))}
+            </div>
+          )}
+
         </div>
       </section>
 
@@ -398,7 +501,7 @@ export default function App() {
         {filteredProducts.length === 0 ? (
           <div className="text-center py-20 text-gray-400 animate-fade-in">
             <p className="text-4xl mb-2">🔍</p>
-            <p className="font-medium">Produk dengan kategori/brand tersebut belum tersedia!!</p>
+            <p className="font-medium">Produk dengan filter brand atau kategori tersebut belum tersedia!!</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -414,7 +517,7 @@ export default function App() {
               >
                 <div className="h-52 overflow-hidden bg-gray-100 dark:bg-gray-700 relative">
                   <span className="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider z-10">
-                    {product.brand}
+                    {product.brand} ({product.origin})
                   </span>
                   <img 
                     src={product.image} 
@@ -643,7 +746,7 @@ export default function App() {
               {cart.length === 0 ? (
                 <div className="text-center text-gray-400 py-20">
                   <p className="text-4xl mb-2">🛒</p>
-                  <p className="font-medium">Keranjangmu masih kosong Silahkan Belanja Terlebih Dahulu!!!</p>
+                  <p className="font-medium">Keranjangmu masih kosong. Silahkan belanja terlebih dahulu!</p>
                 </div>
               ) : (
                 cart.map((item, index) => (
@@ -673,16 +776,17 @@ export default function App() {
             </div>
 
             {cart.length > 0 && (
-              <div className="border-t border-gray-200 dark:border-gray-700 pt-4 space-y-3">
-                <div className="flex justify-between items-center text-base font-bold">
-                  <span className="text-gray-600 dark:text-gray-400">Total Harga:</span>
-                  <span className="text-indigo-600 dark:text-indigo-400 text-lg">
+              <div className="border-t border-gray-200 dark:border-gray-700 pt-4 space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="font-bold text-gray-600 dark:text-gray-300">Total Pembelanjaan:</span>
+                  <span className="font-extrabold text-indigo-600 dark:text-indigo-400 text-lg">
                     Rp {totalPrice.toLocaleString('id-ID')}
                   </span>
                 </div>
+
                 <button 
                   onClick={handleCheckoutWhatsApp}
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition-all duration-300 shadow-lg cursor-pointer flex items-center justify-center gap-2 active:scale-95 hover:scale-[1.02]"
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition-all duration-300 shadow-md cursor-pointer hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2"
                 >
                   💬 Checkout via WhatsApp
                 </button>
@@ -691,7 +795,6 @@ export default function App() {
           </div>
         </div>
       )}
-
     </div>
   )
 }
